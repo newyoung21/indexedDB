@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>indexedDB</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<style>
+		ul>li{height: 100px;line-height: 100px;vertical-align: middle;padding-top:0 !important;padding-bottom: 0 !important;}
+		ul>li>img{height: 70px;width: 70px;vertical-align: middle;}
+		.col-sm-3{padding: 0 !important; margin: 0 -10px !important;}
+	</style>
+</head>
+<body ng-app="myapp">
+	<div class="container" ng-controller="mycontroller">
+		<div class="panel panel-primary ">
+			<div class="panel-heading">
+				上传人物信息图片
+			</div>
+			<div class="panel-body">
+				<form  class="form-horizontal" role="form" enctype=“multipart/form-data” >
+					<div class="form-group">
+						<label for="name" class="col-sm-2 control-label">名字：</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="name" ng-model="name" placeholder="请输入标题">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="age" class="col-sm-2 control-label">年龄：</label>
+						<div class="col-sm-10">
+							<input type="number" class="form-control" id="age" ng-model="age"  placeholder="请输入年龄">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="image" class="col-sm-2 control-label">图片上传：</label>
+						<div class="col-sm-10">
+							<input type="file" class="form-control" id="image" onchange='angular.element(this).scope().fileChanged(this)'>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-2 control-label">
+							<input type="button" value="添加" ng-click="add()" class="btn btn-primary">
+						</div>
+						<div class="col-sm-2 control-label">
+							<input type="reset" class="btn btn-primary">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="delete" class="col-sm-2 control-label">删除数据：</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" id="delete" placeholder="请输入第几条数据，后按确认" ng-model="id">
+						</div>
+						<div class="col-sm-1">
+							<input type="button" class="form-control btn btn-warning" value="确认" ng-click="remove()">
+						</div>
+					</div>
+					<!-- <div class="form-group">
+						<div class="col-sm-2 control-label">
+							<input type="button" value="展示数据库内容列表" class="btn btn-info" id="database">
+						</div>
+					</div> -->
+				</form>
+				<h4 style="margin-top: 30px; text-align: center;">数据库内容列表</h4>
+				<div  class="row">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-3">
+						<ul class="list-group">
+						    <li class="list-group-item" ng-repeat="item in data">
+						    	<span>{{item.name}}</span>
+						    	<span>{{item.age}}岁</span>
+						    </li>
+						</ul>
+					</div>
+					<div class="col-sm-3">
+						<ul class="list-group">
+						    <li class="list-group-item" ng-repeat="item in url">
+						    	<img ng-src="{{item}}" alt="">
+						    </li>
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<script src="js/angular.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/service.js"></script>
+</body>
+</html>
